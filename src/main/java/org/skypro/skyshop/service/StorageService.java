@@ -1,4 +1,4 @@
-package org.skypro.skyshop.model.service;
+package org.skypro.skyshop.service;
 
 import org.skypro.skyshop.model.article.Article;
 import org.skypro.skyshop.model.product.DiscountedProduct;
@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 public class StorageService {
     private final Map<UUID, Product> productMap;
     private final Map<UUID, Article> articleMap;
-
 
     public StorageService() {
         this.productMap = new HashMap<>();
@@ -53,5 +52,9 @@ public class StorageService {
 
     public Collection<Searchable> getSearchables() {
         return Stream.concat(this.productMap.values().stream(), this.articleMap.values().stream()).toList();
+    }
+
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(productMap.get(id));
     }
 }
