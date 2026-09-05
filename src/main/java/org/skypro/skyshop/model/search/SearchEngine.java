@@ -29,8 +29,7 @@ public class SearchEngine implements Searchable {
             int searchableLength = Integer.compare(s2.getNameSearchable().length(), s1.getNameSearchable().length());
             if (searchableLength == 0) {
                 return s1.getNameSearchable().compareTo(s2.getNameSearchable());
-            }
-            else {
+            } else {
                 return searchableLength;
             }
         };
@@ -94,5 +93,5 @@ public class SearchEngine implements Searchable {
         return Searchable.super.getStringRepresentation();
     }
 
-
+///
 }

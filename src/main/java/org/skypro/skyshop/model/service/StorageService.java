@@ -55,3 +55,4 @@ public class StorageService {
         return Stream.concat(this.productMap.values().stream(), this.articleMap.values().stream()).toList();
     }
 }
+///
