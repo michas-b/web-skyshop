@@ -1,24 +1,33 @@
-package org.skypro.skyshop.model.controller;
+package org.skypro.skyshop.controller;
 
 import org.skypro.skyshop.model.article.Article;
+import org.skypro.skyshop.model.basket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.search.SearchResult;
-import org.skypro.skyshop.model.service.SearchService;
-import org.skypro.skyshop.model.service.StorageService;
+import org.skypro.skyshop.service.BasketService;
+import org.skypro.skyshop.service.SearchService;
+import org.skypro.skyshop.service.StorageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.UUID;
+
 
 @RestController
 public class ShopController {
     private final StorageService storageService;
     private final SearchService sService;
+    private final BasketService bService;
 
-    public ShopController(StorageService storageService, SearchService sService) {
+    @Autowired
+    public ShopController(StorageService storageService, SearchService sService, BasketService bService) {
         this.storageService = storageService;
         this.sService = sService;
+        this.bService = bService;
     }
 
     @GetMapping("/products")
@@ -34,5 +43,16 @@ public class ShopController {
     @GetMapping("/search")
     public Collection<SearchResult> getSearchResults(@RequestParam("pattern") String pattern) {
         return sService.search(pattern);
+    }
+
+    @GetMapping("/basket/{id}")
+    public String addProduct(@PathVariable("id") UUID id) {
+        bService.addProduct(id);
+        return "Продукт успешно добавлен";
+    }
+
+    @GetMapping("/basket")
+    public UserBasket getUserBasket() {
+        return bService.getUserBasket();
     }
 }
