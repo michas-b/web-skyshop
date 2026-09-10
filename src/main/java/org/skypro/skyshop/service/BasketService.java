@@ -1,5 +1,6 @@
 package org.skypro.skyshop.service;
 
+import org.skypro.skyshop.exception.NoSuchProductException;
 import org.skypro.skyshop.model.basket.BasketItem;
 import org.skypro.skyshop.model.basket.ProductBasket;
 import org.skypro.skyshop.model.basket.UserBasket;
@@ -19,11 +20,11 @@ public class BasketService {
         this.productBasket = productBasket;
     }
 
-    public void addProduct(UUID id) throws IllegalArgumentException {
+    public void addProduct(UUID id) {
         if (storageService.getProductById(id).isPresent()) {
             productBasket.addProduct(id);
         } else {
-            throw new IllegalArgumentException("Продукта с id: " + id.toString() + " не существует");
+            throw new NoSuchProductException(id.toString());
         }
     }
 
