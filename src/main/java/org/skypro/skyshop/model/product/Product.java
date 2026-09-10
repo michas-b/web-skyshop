@@ -51,6 +51,7 @@ public abstract class Product implements Searchable {
     }
 
     @Override
+    @JsonIgnore
     public String getTypeSearchable() {
         return "PRODUCT";
     }
@@ -66,4 +67,5 @@ public abstract class Product implements Searchable {
     public int hashCode() {
         return Objects.hashCode(productName);
     }
+
 }
