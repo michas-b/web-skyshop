@@ -1,13 +1,10 @@
-package org.skypro.skyshop.model.service;
+package org.skypro.skyshop.service;
 
 
-import org.skypro.skyshop.model.search.Searchable;
 import org.springframework.stereotype.Service;
 import org.skypro.skyshop.model.search.SearchResult;
 
 import java.util.Collection;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 
 @Service
